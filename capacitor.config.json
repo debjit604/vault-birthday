@@ -1,0 +1,12 @@
+{
+  "appId": "com.example.vaultbirthday",
+  "appName": "Vault Birthday",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_icon_config_sample",
+      "iconColor": "#ff4d6d"
+    }
+  }
+}

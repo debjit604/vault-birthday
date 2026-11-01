@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0f0f12"><meta name="description" content="A private, offline birthday vault">
+  <title>Vault Birthday</title><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="shell">
+  <header class="topbar"><div><p class="eyebrow">YOUR PRIVATE LITTLE VAULT</p><h1>Birthdays<span class="accent">.</span></h1></div><button id="themeToggle" class="icon-button" aria-label="Toggle light theme" title="Toggle theme">☼</button></header>
+  <section id="noticeArea" aria-live="polite"></section>
+  <section class="stats" id="stats"></section>
+  <section class="toolbar"><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find someone…" aria-label="Search birthdays"></label><button id="addButton" class="primary">＋ <span>Add birthday</span></button></section>
+  <nav class="filters" aria-label="Filter by group"><button class="chip active" data-group="all">All</button><button class="chip" data-group="family">Family</button><button class="chip" data-group="work">Work</button><button class="chip" data-group="friends">Friends</button></nav>
+  <section id="people" class="people" aria-live="polite"></section>
+  <section class="lower"><div class="section-head"><div><p class="eyebrow">AT A GLANCE</p><h2>Next 60 days</h2></div></div><div id="heatmap" class="heatmap" aria-label="Birthday calendar heatmap"></div></section>
+  <footer><span>Local by design · Stored on this device</span><div><button id="exportIcs" class="text-button">Export calendar</button><button id="backup" class="text-button">Backup</button><button id="restore" class="text-button">Restore</button><input id="restoreFile" type="file" accept="application/json" hidden></div></footer>
+</main>
+<dialog id="personDialog"><form id="personForm"><div class="dialog-head"><div><p class="eyebrow">YOUR VAULT</p><h2 id="formTitle">Add birthday</h2></div><button type="button" class="icon-button" id="closeDialog" aria-label="Close">×</button></div><input type="hidden" id="personId"><label>Name<input id="name" maxlength="70" required placeholder="e.g. Alex"></label><div class="form-row"><label>Birthday<input id="birthday" type="date" required></label><label>Time<input id="reminderTime" type="time" value="09:00" required></label></div><div class="form-row"><label>Group<select id="group"><option value="family">Family</option><option value="friends">Friends</option><option value="work">Work</option></select></label><label>Avatar<select id="emoji"></select></label></div><label>Phone for birthday wishes<input id="phone" type="tel" placeholder="Optional"></label><label>Notes<textarea id="notes" rows="3" maxlength="500" placeholder="Gift ideas, what they love…"></textarea></label><div class="checklist-head"><strong>Gift checklist</strong><button id="addGift" type="button" class="text-button">＋ Add item</button></div><div id="giftEditor" class="gift-editor"></div><div class="dialog-actions"><button type="button" id="deletePerson" class="danger hidden">Delete</button><button type="submit" class="primary">Save birthday</button></div></form></dialog>
+<dialog id="alarmDialog" class="alarm-dialog"><div class="alarm-content"><div class="alarm-mark">✳</div><p class="eyebrow">A MOMENT TO CELEBRATE</p><h2 id="alarmTitle">Birthday reminder</h2><p id="alarmDetail"></p><div class="alarm-actions"><button id="snooze" class="secondary">Snooze 10 min</button><button id="dismissAlarm" class="primary">Dismiss</button></div></div></dialog>
+<dialog id="pinDialog"><form id="pinForm"><h2 id="pinHeading">Private vault</h2><p id="pinPrompt">Enter your 4-digit PIN.</p><input id="pinInput" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" aria-label="Four digit PIN"><p id="pinError" class="error"></p><button id="pinSubmit" class="primary">Unlock</button><button type="button" id="fakeNotes" class="text-button">Forgot? Show Notes</button></form></dialog>
+<section id="fakeScreen" class="fake-screen hidden"><div class="notes-app"><h1>Notes</h1><p>Today</p><article>Ideas for the week<br><br>• Pick up groceries<br>• Call the dentist<br>• Remember to take a break</article><button id="unlockFromFake" class="text-button">Open vault</button></div></section>
+<aside id="devPanel" class="dev-panel hidden"><strong>Developer tools</strong><button id="runStages" class="secondary">Run all stages in 20s</button><button id="testLeap" class="secondary">Test Feb 29</button><pre id="devLog"></pre></aside>
+<script src="native-notifications.bundle.js"></script><script src="app.js" defer></script>
+</body></html>
