@@ -770,7 +770,9 @@
   });
 
   // native-notifications.js
+  init_dist();
   window.VaultLocalNotifications = LocalNotifications;
+  window.VaultRingtonePicker = registerPlugin("RingtonePicker");
 })();
 /*! Bundled license information:
 

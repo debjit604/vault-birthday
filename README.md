@@ -57,6 +57,14 @@ Android notifications use a dedicated **Birthday reminders** channel. After inst
 
 When you open the app at `localhost:3000` in a browser, the browser/phone controls notification sound and does not let the page select your ringtone. The ringtone option applies to the installed Capacitor Android app. Capacitor uses an Android notification channel and packaged raw sound resource for native notifications; the OS sound picker is where users choose their ringtone. [Capacitor notification sound/channel docs](https://capacitorjs.com/docs/apis/local-notifications#configuration)
 
+## Changelog
+
+- Native Android birthday alarms now use a dedicated high-importance notification channel whose sound URI is selected on-device.
+- Added **Choose Alarm Sound** and **Test Alarm Sound Now** in Settings.
+- Redesigned the dashboard with responsive cards, animated entry, countdown flips, alarm motion, and session-only birthday confetti. Reduced-motion preferences are respected.
+- Replaced the app icon with a gradient birthday cake across web and Android launcher sizes.
+- The named `@capawesome/capacitor-ringtonepicker` package is not published on npm (registry returned E404); the Android system ringtone picker is implemented through a small app-local Capacitor plugin instead.
+
 ## Auto-build status
 ![Build APK](https://github.com/debjit604/vault-birthday/actions/workflows/build-apk.yml/badge.svg)
 ![Deploy Web](https://github.com/debjit604/vault-birthday/actions/workflows/deploy-web.yml/badge.svg)
