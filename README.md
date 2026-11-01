@@ -56,3 +56,10 @@ After sending a birthday wish, return to the app and tap **Mark wished** on that
 Android notifications use a dedicated **Birthday reminders** channel. After installing/rebuilding the app and allowing notifications, open **Settings → Apps → Vault Birthday → Notifications → Birthday reminders → Sound** and choose a ringtone or another sound offered by your phone. Some Android versions let you add a music file from the sound picker. Android owns this channel sound, so it can be changed from Settings; the bundled `vault_alarm.wav` is the initial fallback. The app creates a dedicated channel for this sound. On Android 8+, channel sound is controlled by Android and cannot be replaced by a webpage or by changing an individual notification.
 
 When you open the app at `localhost:3000` in a browser, the browser/phone controls notification sound and does not let the page select your ringtone. The ringtone option applies to the installed Capacitor Android app. Capacitor uses an Android notification channel and packaged raw sound resource for native notifications; the OS sound picker is where users choose their ringtone. [Capacitor notification sound/channel docs](https://capacitorjs.com/docs/apis/local-notifications#configuration)
+
+## Auto-build status
+![Build APK](https://github.com/debjit604/vault-birthday/actions/workflows/build-apk.yml/badge.svg)
+![Deploy Web](https://github.com/debjit604/vault-birthday/actions/workflows/deploy-web.yml/badge.svg)
+
+- Download APK: Actions tab -> latest "Build Android APK" run -> Artifacts -> vault-birthday-apk.zip
+- Live web app: https://debjit604.github.io/vault-birthday/
