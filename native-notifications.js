@@ -1,4 +1,5 @@
+import { Capacitor, registerPlugin } from '@capacitor/core';
 import { LocalNotifications } from '@capacitor/local-notifications';
-import { registerPlugin } from '@capacitor/core';
 window.VaultLocalNotifications = LocalNotifications;
 window.VaultRingtonePicker = registerPlugin('RingtonePicker');
+window.VaultIsNative = Capacitor.isNativePlatform();

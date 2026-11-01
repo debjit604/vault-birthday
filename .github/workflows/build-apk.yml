@@ -4,6 +4,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -43,13 +46,36 @@ jobs:
         working-directory: android
         run: chmod +x gradlew
 
-      - name: Build debug APK
-        working-directory: android
-        run: ./gradlew assembleDebug --stacktrace --no-daemon
+      - name: Verify web assets were synced
+        run: |
+          grep -q native-notifications.bundle.js www/index.html
+          cmp www/app.js android/app/src/main/assets/public/app.js
+          cmp www/index.html android/app/src/main/assets/public/index.html
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+      - name: Restore fixed signing key
+        run: |
+          mkdir -p ~/.android
+          echo "${{ secrets.DEBUG_KEYSTORE_B64 }}" | base64 -d > ~/.android/debug.keystore
+
+      - name: Build APK
+        working-directory: android
+        run: ./gradlew assembleDebug -Pvc=${{ github.run_number }} --stacktrace --no-daemon
+
+      - name: Prove the APK contains this build
+        run: |
+          unzip -p android/app/build/outputs/apk/debug/app-debug.apk assets/public/app.js | cmp - app.js
+          cp android/app/build/outputs/apk/debug/app-debug.apk vault-birthday.apk
+
+      - uses: actions/upload-artifact@v4
         with:
           name: vault-birthday-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: vault-birthday.apk
           retention-days: 30
+
+      - name: Publish permanent "latest" release
+        env:
+          GH_TOKEN: "${{ github.token }}"
+        run: |
+          gh release delete latest --cleanup-tag -y || true
+          gh release create latest vault-birthday.apk --target "$GITHUB_SHA" \
+            --title "Latest build #${{ github.run_number }}" --notes "Commit $GITHUB_SHA"

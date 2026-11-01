@@ -749,6 +749,9 @@
     }
   });
 
+  // native-notifications.js
+  init_dist();
+
   // node_modules/@capacitor/local-notifications/dist/esm/index.js
   init_dist();
 
@@ -770,9 +773,9 @@
   });
 
   // native-notifications.js
-  init_dist();
   window.VaultLocalNotifications = LocalNotifications;
   window.VaultRingtonePicker = registerPlugin("RingtonePicker");
+  window.VaultIsNative = Capacitor.isNativePlatform();
 })();
 /*! Bundled license information:
 
