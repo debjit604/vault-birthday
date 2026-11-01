@@ -7,7 +7,9 @@ android {
         applicationId "com.example.vaultbirthday"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode (project.findProperty('vc') ?: '1').toInteger()
+        def vcProp = project.findProperty('vc')
+        def vcValue = (vcProp != null && vcProp.toString().isInteger()) ? vcProp.toString().toInteger() : 1
+        versionCode vcValue
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {

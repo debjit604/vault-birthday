@@ -59,7 +59,11 @@ jobs:
 
       - name: Build APK
         working-directory: android
-        run: ./gradlew assembleDebug -Pvc=${{ github.run_number }} --stacktrace --no-daemon
+        run: |
+          VC="${{ github.run_number }}"
+          if [ -z "$VC" ] || ! [[ "$VC" =~ ^[0-9]+$ ]]; then VC=1; fi
+          echo "Building with versionCode=$VC"
+          ./gradlew assembleDebug -Pvc="$VC" --stacktrace --no-daemon
 
       - name: Prove the APK contains this build
         run: |
